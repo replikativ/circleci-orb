@@ -1,0 +1,10 @@
+description: |
+  Build an uberjar with leiningen.
+executor: leiningen
+steps:
+  - attach_workspace:
+      at: /home/circleci
+  - run:
+      name: Build
+      command: lein uberjar
+      no_output_timeout: 5m

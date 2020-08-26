@@ -1,0 +1,10 @@
+description: |
+  Run unittests via ./bin/run-unit-tests.
+executor: leiningen
+steps:
+  - attach_workspace:
+      at: /home/circleci
+  - run:
+      name: Run Unittests
+      command: ./bin/run-unittests
+      no_output_timeout: 5m

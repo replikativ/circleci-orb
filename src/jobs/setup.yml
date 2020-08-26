@@ -1,0 +1,29 @@
+description: |
+  Setup the CI run.
+executor: leiningen
+steps:
+  - restore_cache:
+      keys:
+        - source-{{ .Branch }}-{{ .Revision }}
+        - source-{{ .Branch }}
+        - source-
+  - checkout
+  - save_cache:
+      key: source-{{ .Branch }}-{{ .Revision }}
+      paths:
+        - .git
+  - restore_cache:
+      keys:
+        - deps-{{ checksum "project.clj" }}
+        - deps-
+  - run: lein deps
+  - save_cache:
+      key: deps-{{ checksum "project.clj" }}
+      paths:
+        - /home/circleci/.m2
+        - /home/circleci/.lein
+  - persist_to_workspace:
+      root: /home/circleci/
+      paths:
+        - .m2
+        - replikativ

@@ -1,0 +1,43 @@
+version: 2.1
+
+orbs:
+  barfoo: replikativ/clj-lein@<<pipeline.parameters.dev-orb-version>>
+  orb-tools: circleci/orb-tools@9.0
+
+parameters:
+  run-integration-tests:
+    type: boolean
+    default: false
+  dev-orb-version:
+    type: string
+    default: "dev:alpha"
+
+workflows:
+  lint_pack_publish:
+    jobs:
+      - orb-tools/lint
+      - orb-tools/pack:
+          requires:
+            - orb-tools/lint
+      - orb-tools/publish-dev:
+          context: orb-deploy
+          orb-name: replikativ/clj-lein
+          publish-alpha-version: false
+          requires:
+            - orb-tools/pack
+          filters:
+            branches:
+              only:
+                - development
+                - master
+      - orb-tools/dev-promote-prod-from-commit-subject:
+          context: orb-deploy
+          orb-name: replikativ/clj-lein
+          add-pr-comment: false
+          fail-if-semver-not-indicated: true
+          publish-version-tag: false
+          requires:
+            - orb-tools/publish-dev
+          filters:
+            branches:
+              only: master

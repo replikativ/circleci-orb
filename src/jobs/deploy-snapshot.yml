@@ -1,0 +1,15 @@
+description: |
+  Deploy a snapshot version to Clojars if there is SNAPSHOT in the version string.
+executor: leiningen
+steps:
+  - attach_workspace:
+      at: /home/circleci
+  - run:
+      name: Deploy Snapshot to Clojars
+      command: |
+        VERSION=$(head -n 1 project.clj | awk '{print $3}' | tr -d \")
+        if [[ ${VERSION} =~ .*-SNAPSHOT ]]; then
+            lein deploy clojars
+        else
+            exit 0
+        fi

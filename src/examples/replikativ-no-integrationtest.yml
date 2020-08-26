@@ -1,0 +1,37 @@
+description: |
+  CI configuration for replikativ/datahike as an example for
+  CLJ-only projects using Leiningen.
+usage:
+  version: 2.1
+
+  orbs:
+    lein: replikativ/clj-lein@0
+
+  workflows:
+    build_test_and_deploy:
+      jobs:
+        - lein/setup
+        - lein/unittest:
+            requires:
+              - lein/setup
+        - lein/build:
+            requires:
+              - lein/setup
+        - lein/deploy-snapshot:
+            filters:
+              branches:
+                only: development
+            requires:
+              - lein/setup
+              - lein/unittest
+              - lein/integrationtest
+              - lein/build
+        - lein/deploy-release:
+            filters:
+              branches:
+                only: master
+            requires:
+              - lein/setup
+              - lein/unittest
+              - lein/integrationtest
+              - lein/build
