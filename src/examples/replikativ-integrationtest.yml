@@ -11,6 +11,7 @@ usage:
     build_test_and_deploy:
       jobs:
         - lein/setup
+        - lein/format
         - lein/unittest:
             requires:
               - lein/setup

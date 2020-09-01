@@ -1,0 +1,10 @@
+description: |
+  Check formatting of source code.
+executor: leiningen
+steps:
+  - attach_workspace:
+      at: /home/circleci
+  - run:
+      name: Format
+      command: lein cljfmt check
+      no_output_timeout: 5m
