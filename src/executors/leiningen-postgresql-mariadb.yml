@@ -1,5 +1,5 @@
 description:
-  Default leiningen executor for replikativ projects using postgresql.
+  Default leiningen executor for replikativ projects using postgresql and mariadb.
 docker:
   - image: circleci/clojure:openjdk-8-lein
     environment:
@@ -10,4 +10,10 @@ docker:
       POSTGRES_USER: alice
       POSTGRES_PASSWORD: foo
       POSTGRES_DB: config-test
+  - image: circleci/mariadb:latest
+    environment:
+      MYSQL_USER: alice
+      MYSQL_PASSWORD: foo
+      MYSQL_DATABASE: config-test
+      MYSQL_RANDOM_ROOT_PASSWORD: true
 working_directory: /home/circleci/replikativ
