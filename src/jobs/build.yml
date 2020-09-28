@@ -5,6 +5,9 @@ steps:
   - attach_workspace:
       at: /home/circleci
   - run:
+      name: Update pom
+      command: clojure -Spom
+  - run:
       name: Build
       command: clojure -A:jar
       no_output_timeout: 5m
