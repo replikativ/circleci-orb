@@ -25,11 +25,6 @@ workflows:
           publish-alpha-version: false
           requires:
             - orb-tools/pack
-          filters:
-            branches:
-              only:
-                - development
-                - master
       - orb-tools/dev-promote-prod-from-commit-subject:
           context: orb-deploy
           orb-name: replikativ/clj-lein
@@ -40,4 +35,4 @@ workflows:
             - orb-tools/publish-dev
           filters:
             branches:
-              only: master
+              only: clj-lein
