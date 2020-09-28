@@ -1,0 +1,10 @@
+description: |
+  Run cljstests via ./bin/run-cljstests.
+executor: clojurecli
+steps:
+  - attach_workspace:
+      at: /home/circleci
+  - run:
+      name: Run CLJS tests.
+      command: ./bin/run-cljstests
+      no_output_timeout: 5m
