@@ -18,5 +18,5 @@ steps:
         if [[ ${VERSION} =~ .*-SNAPSHOT ]]; then
             exit 0
         else
-            clojure -Sdeps '{:deps {deps-deploy/deps-deploy {:mvn/version "0.1.0"}}}' "-m" "deps-deploy.deps-deploy" "deploy" "replikativ-<<parameters.jarname>>.jar"
+            clojure -Sdeps '{:deps {slipset/deps-deploy {:mvn/version "0.1.0"}}}' "-m" "deps-deploy.deps-deploy" "deploy" "replikativ-<<parameters.jarname>>.jar"
         fi
