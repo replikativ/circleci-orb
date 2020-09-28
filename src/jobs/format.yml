@@ -6,5 +6,5 @@ steps:
       at: /home/circleci
   - run:
       name: Format
-      command: clojure -Sdeps '{:deps {cljfmt/cljfmt {:mvn/version "0.6.4"}}}' -m cljfmt.main check
+      command: clojure -A:format
       no_output_timeout: 5m
