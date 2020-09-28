@@ -1,6 +1,10 @@
 description: |
   Deploy a release version to Clojars if there is not SNAPSHOT in the version string.
 executor: clojurecli
+parameters:
+  jarname:
+    default: "libary"
+    type: string
 steps:
   - attach_workspace:
       at: /home/circleci
@@ -12,7 +16,7 @@ steps:
       command: |
         VERSION=$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml)
         if [[ ${VERSION} =~ .*-SNAPSHOT ]]; then
-            clojure -A:deploy
+            clojure -Sdeps '{:deps {deps-deploy/deps-deploy {:mvn/version "0.1.0"}}}' "-m" "deps-deploy.deps-deploy" "deploy" "replikativ-<<parameters.jarname>>.jar"
         else
             exit 0
         fi

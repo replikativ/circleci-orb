@@ -1,6 +1,10 @@
 description: |
   Deploy a snapshot version to Clojars if there is SNAPSHOT in the version string.
 executor: clojurecli
+parameters:
+  jarname:
+    default: "libary"
+    type: string
 steps:
   - attach_workspace:
       at: /home/circleci
@@ -14,5 +18,5 @@ steps:
         if [[ ${VERSION} =~ .*-SNAPSHOT ]]; then
             exit 0
         else
-            clojure -A:deploy
+            clojure -Sdeps '{:deps {deps-deploy/deps-deploy {:mvn/version "0.1.0"}}}' "-m" "deps-deploy.deps-deploy" "deploy" "replikativ-<<parameters.jarname>>.jar"
         fi
