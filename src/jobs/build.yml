@@ -1,10 +1,10 @@
 description: |
-  Build an uberjar with leiningen.
-executor: leiningen
+  Build a jar with depstar for deployment to Clojars.
+executor: clojurecli
 steps:
   - attach_workspace:
       at: /home/circleci
   - run:
       name: Build
-      command: lein uberjar
+      command: clojure -A:depstar
       no_output_timeout: 5m

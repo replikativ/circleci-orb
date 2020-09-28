@@ -1,0 +1,5 @@
+description:
+  Default Clojure CLI Tools executor for replikativ projects.
+docker:
+  - image: circleci/clojure:openjdk-8-tools-deps-node-browsers
+working_directory: /home/circleci/replikativ

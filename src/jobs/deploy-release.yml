@@ -1,15 +1,18 @@
 description: |
   Deploy a release version to Clojars if there is not SNAPSHOT in the version string.
-executor: leiningen
+executor: clojurecli
 steps:
   - attach_workspace:
       at: /home/circleci
   - run:
-      name: Deploy Release to Clojars
+      name: Install xmllint
+      command: sudo apt-get install libxml2-utils
+  - run:
+      name: Deploy Snapshot to Clojars
       command: |
-        VERSION=$(head -n 1 project.clj | awk '{print $3}' | tr -d \")
+        VERSION=$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml)
         if [[ ${VERSION} =~ .*-SNAPSHOT ]]; then
-            exit 0
+            clojure -A:deploy
         else
-            lein deploy clojars
+            exit 0
         fi

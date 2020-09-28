@@ -1,6 +1,6 @@
 description: |
   Run integrationtests via ./bin/run-integration-tests using PostgreSQL.
-executor: leiningen-postgresql
+executor: clojurecli-postgresql
 steps:
   - attach_workspace:
       at: /home/circleci

@@ -1,10 +1,10 @@
 description: |
   Check formatting of source code.
-executor: leiningen
+executor: clojurecli
 steps:
   - attach_workspace:
       at: /home/circleci
   - run:
       name: Format
-      command: lein cljfmt check
+      command: clojure -Sdeps '{:deps {cljfmt/cljfmt {:mvn/version "0.6.4"}}}' -m cljfmt.main check
       no_output_timeout: 5m

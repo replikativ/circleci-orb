@@ -1,6 +1,6 @@
 description: |
   Setup the CI run.
-executor: leiningen
+executor: clojurecli
 steps:
   - restore_cache:
       keys:
@@ -14,16 +14,25 @@ steps:
         - .git
   - restore_cache:
       keys:
-        - deps-{{ checksum "project.clj" }}
+        - deps-{{ checksum "deps.edn" }}
         - deps-
-  - run: lein deps
+  - run: clojure -e nil
   - save_cache:
-      key: deps-{{ checksum "project.clj" }}
+      key: deps-{{ checksum "deps.edn" }}
       paths:
         - /home/circleci/.m2
-        - /home/circleci/.lein
+  - restore_cache:
+      keys:
+        - npm-{{ checksum "package.json" }}
+        - npm-
+  - run: npm ci
+  - save_cache:
+      key: npm-{{ checksum "package.json" }}
+      paths:
+        - /home/circleci/.npm
   - persist_to_workspace:
       root: /home/circleci/
       paths:
         - .m2
+        - .npm
         - replikativ

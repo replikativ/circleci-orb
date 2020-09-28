@@ -1,6 +1,6 @@
 description: |
   Run unittests via ./bin/run-unit-tests.
-executor: leiningen
+executor: clojurecli
 steps:
   - attach_workspace:
       at: /home/circleci

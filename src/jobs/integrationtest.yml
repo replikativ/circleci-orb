@@ -1,6 +1,6 @@
 description: |
   Run integrationtests via ./bin/run-integration-tests.
-executor: leiningen
+executor: clojurecli
 steps:
   - attach_workspace:
       at: /home/circleci

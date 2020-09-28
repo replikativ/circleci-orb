@@ -1,10 +1,7 @@
-description:
-  Default leiningen executor for replikativ projects using postgresql.
+description: |
+  Default Clojure CLI Tools executor for replikativ projects using PostgreSQL integration tests.
 docker:
-  - image: circleci/clojure:openjdk-8-lein
-    environment:
-      LEIN_ROOT: nbd
-      JVM_OPTS: -Xmx3200m
+  - image: circleci/clojure:openjdk-8-tools-deps-node-browsers
   - image: circleci/postgres:latest
     environment:
       POSTGRES_USER: alice

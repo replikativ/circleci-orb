@@ -1,19 +1,16 @@
-description:
-  Default leiningen executor for replikativ projects using postgresql and mariadb.
+description: |
+  Default Clojure CLI Tools executor for replikativ projects using PostgreSQL and MariaDB.
 docker:
-  - image: circleci/clojure:openjdk-8-lein
-    environment:
-      LEIN_ROOT: nbd
-      JVM_OPTS: -Xmx3200m
+  - image: circleci/clojure:openjdk-8-tools-deps-node-browsers
   - image: circleci/postgres:latest
     environment:
+      POSTGRES_DB: config-test
       POSTGRES_USER: alice
       POSTGRES_PASSWORD: foo
-      POSTGRES_DB: config-test
   - image: circleci/mariadb:latest
     environment:
+      MYSQL_DATABASE: config-test
       MYSQL_USER: alice
       MYSQL_PASSWORD: foo
-      MYSQL_DATABASE: config-test
       MYSQL_RANDOM_ROOT_PASSWORD: true
 working_directory: /home/circleci/replikativ

@@ -1,6 +1,6 @@
 description: |
   Run integrationtests via ./bin/run-integration-tests using PostgreSQL and MariaDB.
-executor: leiningen-postgresql-mariadb
+executor: clojurecli-postgresql-mariadb
 steps:
   - attach_workspace:
       at: /home/circleci

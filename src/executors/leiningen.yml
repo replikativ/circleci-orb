@@ -1,8 +1,0 @@
-description:
-  Default leiningen executor for replikativ projects.
-docker:
-  - image: circleci/clojure:openjdk-8-lein
-environment:
-  LEIN_ROOT: nbd
-  JVM_OPTS: -Xmx3200m
-working_directory: /home/circleci/replikativ
