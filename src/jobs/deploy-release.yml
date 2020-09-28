@@ -19,5 +19,5 @@ steps:
             echo "Not releasing because this is a snapshot: $VERSION"
             exit 0
         else
-            clojure -Sdeps '{:deps {slipset/deps-deploy {:mvn/version "0.1.0"}}}' "-m" "deps-deploy.deps-deploy" "deploy" "replikativ-<<parameters.jarname>>.jar"
+            clojure -Sdeps '{:deps {slipset/deps-deploy {:mvn/version "RELEASE"}}}' "-m" "deps-deploy.deps-deploy" "deploy" "replikativ-<<parameters.jarname>>.jar"
         fi

@@ -16,7 +16,7 @@ steps:
       command: |
         VERSION=$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml)
         if [[ ${VERSION} =~ .*-SNAPSHOT ]]; then
-            clojure -Sdeps '{:deps {deps-deploy/deps-deploy {:mvn/version "0.1.0"}}}' "-m" "deps-deploy.deps-deploy" "deploy" "replikativ-<<parameters.jarname>>.jar"
+            clojure -Sdeps '{:deps {slipset/deps-deploy {:mvn/version "RELEASE"}}}' "-m" "deps-deploy.deps-deploy" "deploy" "replikativ-<<parameters.jarname>>.jar"
         else
             echo "Not releasing because this is no snapshot: $VERSION"
             exit 0
