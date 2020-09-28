@@ -6,5 +6,5 @@ steps:
       at: /home/circleci
   - run:
       name: Build
-      command: clojure -A:depstar
+      command: clojure -A:jar
       no_output_timeout: 5m

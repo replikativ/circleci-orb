@@ -1,5 +1,5 @@
 version: 2.1
-description: "CLJ Leiningen Orb for replikativ"
+description: "Clojure CLI Tools Orb for replikativ"
 
 display:
   home_url: "https://github.com/replikativ"
