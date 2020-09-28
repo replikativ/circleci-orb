@@ -12,11 +12,12 @@ steps:
       name: Install xmllint
       command: sudo apt-get install libxml2-utils
   - run:
-      name: Deploy Snapshot to Clojars
+      name: Deploy Release to Clojars
       command: |
         VERSION=$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml)
         if [[ ${VERSION} =~ .*-SNAPSHOT ]]; then
-            clojure -Sdeps '{:deps {deps-deploy/deps-deploy {:mvn/version "0.1.0"}}}' "-m" "deps-deploy.deps-deploy" "deploy" "replikativ-<<parameters.jarname>>.jar"
-        else
+            echo "Not releasing because this is a snapshot: $VERSION"
             exit 0
+        else
+            clojure -Sdeps '{:deps {slipset/deps-deploy {:mvn/version "0.1.0"}}}' "-m" "deps-deploy.deps-deploy" "deploy" "replikativ-<<parameters.jarname>>.jar"
         fi
