@@ -1,0 +1,18 @@
+description: |
+  Default Clojure CLI Tools executor for replikativ projects using Datahike Server for integration tests.
+docker:
+  - image: circleci/clojure:openjdk-11-tools-deps-node-browsers
+    auth:
+      username: $DOCKER_LOGIN
+      password: $DOCKER_PASSWORD
+  - image: replikativ/datahike-server:snapshot
+    auth:
+      username: $DOCKER_LOGIN
+      password: $DOCKER_PASSWORD
+    environment:
+      DATAHIKE_SERVER_LOGLEVEL: debug
+      DATAHIKE_SERVER_DEV_MODE: true
+      DATAHIKE_STORE_BACKEND: mem
+      DATAHIKE_SCHEMA_FLEXIBILITY: read
+      DATAHIKE_NAME: config-test
+working_directory: /home/circleci/replikativ
