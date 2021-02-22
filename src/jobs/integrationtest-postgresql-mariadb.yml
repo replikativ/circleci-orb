@@ -1,5 +1,5 @@
 description: |
-  Run integrationtests via ./bin/run-integration-tests using PostgreSQL and MariaDB.
+  Run integrationtests via ./bin/run-integrationtests using PostgreSQL and MariaDB
 executor: clojurecli-postgresql-mariadb
 steps:
   - attach_workspace:
@@ -8,3 +8,7 @@ steps:
       name: Run Integrationtests
       command: ./bin/run-integrationtests
       no_output_timeout: 5m
+  - save_cache:
+      key: deps-{{ checksum "deps.edn" }}
+      paths:
+        - /home/circleci/.m2

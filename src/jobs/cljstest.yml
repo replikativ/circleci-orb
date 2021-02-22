@@ -8,3 +8,7 @@ steps:
       name: Run CLJS tests.
       command: ./bin/run-cljstests
       no_output_timeout: 5m
+  - save_cache:
+      key: deps-{{ checksum "deps.edn" }}
+      paths:
+        - /home/circleci/.m2

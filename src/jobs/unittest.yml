@@ -1,5 +1,5 @@
 description: |
-  Run unittests via ./bin/run-unit-tests.
+  Run unittests via ./bin/run-unittests
 executor: clojurecli
 steps:
   - attach_workspace:
@@ -8,3 +8,7 @@ steps:
       name: Run Unittests
       command: ./bin/run-unittests
       no_output_timeout: 5m
+  - save_cache:
+      key: deps-{{ checksum "deps.edn" }}
+      paths:
+        - /home/circleci/.m2
