@@ -1,0 +1,14 @@
+description: |
+  Default Clojure CLI Tools executor for replikativ projects using Cassandra integration tests.
+docker:
+  - image: circleci/clojure:openjdk-8-tools-deps-node-browsers
+    auth:
+      username: $DOCKER_LOGIN
+      password: $DOCKER_PASSWORD
+  - image: cassandra:latest
+    auth:
+      username: $DOCKER_LOGIN
+      password: $DOCKER_PASSWORD
+    environment:
+      CASSANDRA_LISTEN_ADDRESS: "127.0.0.1"
+working_directory: /home/circleci/replikativ
