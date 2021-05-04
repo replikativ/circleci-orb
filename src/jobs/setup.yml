@@ -1,6 +1,10 @@
 description: |
   Setup the CI run.
 executor: clojurecli
+parameters:
+  setup_cljs:
+    type: boolean
+    default: true
 steps:
   - restore_cache:
       keys:
@@ -21,15 +25,18 @@ steps:
       key: deps-{{ checksum "deps.edn" }}
       paths:
         - /home/circleci/.m2
-  - restore_cache:
-      keys:
-        - npm-{{ checksum "package.json" }}
-        - npm-
-  - run: npm ci
-  - save_cache:
-      key: npm-{{ checksum "package.json" }}
-      paths:
-        - /home/circleci/.npm
+  - when:
+      condition: <<parameters.setup_cljs>>
+      steps:
+        - restore_cache:
+            keys:
+              - npm-{{ checksum "package-lock.json" }}
+              - npm-
+        - run: npm ci
+        - save_cache:
+            key: npm-{{ checksum "package-lock.json" }}
+            paths:
+              - /home/circleci/.npm
   - persist_to_workspace:
       root: /home/circleci/
       paths:
