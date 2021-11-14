@@ -1,0 +1,35 @@
+description: |
+  Default Clojure CLI Tools executor for replikativ projects using PostgreSQL, MySQL and MSSQL.
+docker:
+  - image: docker.io/circleci/clojure:openjdk-11-tools-deps-node-browsers
+    auth:
+      username: $DOCKER_LOGIN
+      password: $DOCKER_PASSWORD
+  - image: docker.io/circleci/postgres:latest
+    auth:
+      username: $DOCKER_LOGIN
+      password: $DOCKER_PASSWORD
+    environment:
+      POSTGRES_DB: config-test
+      POSTGRES_USER: alice
+      POSTGRES_PASSWORD: foo
+  - image: docker.io/circleci/mysql:latest
+    auth:
+      username: $DOCKER_LOGIN
+      password: $DOCKER_PASSWORD
+    command: [--max_allowed_packet=32505856]
+    environment:
+      MYSQL_DATABASE: config-test
+      MYSQL_USER: alice
+      MYSQL_PASSWORD: foo
+      MYSQL_RANDOM_ROOT_PASSWORD: true
+  - image: mcr.microsoft.com/mssql/server:2019-latest
+    auth:
+      username: $DOCKER_LOGIN
+      password: $DOCKER_PASSWORD
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: passwordA1!
+      MSSQL_PID: Developer
+      MSSQL_TCP_PORT: 1433
+working_directory: /home/circleci/replikativ
