@@ -1,11 +1,11 @@
 description: |
   Default Clojure CLI Tools executor for replikativ projects using PostgreSQL and MariaDB.
 docker:
-  - image: circleci/clojure:openjdk-8-tools-deps-node-browsers
+  - image: cimg/clojure:1.10-browsers
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD
-  - image: circleci/postgres:latest
+  - image: cimg/postgres:14.2
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD
@@ -13,7 +13,7 @@ docker:
       POSTGRES_DB: config-test
       POSTGRES_USER: alice
       POSTGRES_PASSWORD: foo
-  - image: circleci/mariadb:latest
+  - image: cimg/mariadb:10.6
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD

@@ -1,11 +1,11 @@
 description: |
   Default Clojure CLI Tools executor for replikativ projects using PostgreSQL integration tests.
 docker:
-  - image: circleci/clojure:openjdk-8-tools-deps-node-browsers
+  - image: cimg/clojure:1.10-browsers
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD
-  - image: circleci/postgres:latest
+  - image: cimg/postgres:14.2
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD

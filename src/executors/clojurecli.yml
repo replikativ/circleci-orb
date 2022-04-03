@@ -1,7 +1,7 @@
 description:
   Default Clojure CLI Tools executor for replikativ projects.
 docker:
-  - image: circleci/clojure:openjdk-8-tools-deps-node-browsers
+  - image: cimg/clojure:1.10-browsers
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD
