@@ -1,0 +1,9 @@
+description: Create a release draft on GitHub
+executor: clojurecli
+steps:
+  - attach_workspace:
+      at: /home/circleci
+  - run:
+      name: Create Release
+      command: clojure -T:build release
+      no_output_timeout: 5m

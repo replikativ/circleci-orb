@@ -20,7 +20,7 @@ steps:
       keys:
         - deps-{{ checksum "deps.edn" }}
         - deps-
-  - run: clojure -A:build:test -P
+  - run: clojure -P -A:dev:test:build
   - save_cache:
       key: deps-{{ checksum "deps.edn" }}
       paths:

@@ -12,10 +12,16 @@ This CircleCI Orb helps continuously integrating replikativ projects
 
 ## Usage
 
-Example use-cases are provided on the orb [registry page](https://circleci.com/orbs/registry/orb/replikativ/clj-tools#usage-examples). Source for these examples can be found within the `src/examples` directory. Unittests are run via `./bin/run-unittests` and integration tests are run via `./bin/run-integrationtests`. Formatting is checked with `cljfmt`, a build is executed with `seancorfield/depstar` and deployments to Clojars are done `deps-deploy/deps-deploy`.
+Example use-cases are provided on the orb [registry page](https://circleci.com/orbs/registry/orb/replikativ/clj-tools#usage-examples).
+Source for these examples can be found within the `src/examples` directory. Unittests are run via `./bin/run-unittests` and
+integration tests are run via `./bin/run-integrationtests`. Formatting is checked with `cljfmt`, a build is created with clj-tools
+and deployments to Clojars are done `deps-deploy/deps-deploy`.
 
-For using the default replikativ workflow it is only necessary to basically copy one of the examples into the `.circleci/config.yml` file, commit and push it. The default steps are setup, format, build, unittest, deploy-snapshot (for commits to development branch) and deploy-release (for commit to master branch). If you want to run integration tests there is one already there for integrationtesting with a PostgreSQL database that listens on port 5432 with a database 'config-test', user 'alice' and password 'foo'. One for PostgreSQL and MariaDB exists as well, connection to MariaDB works quite the same.
+For using the default replikativ workflow it is only necessary to basically copy one of the examples into the `.circleci/config.yml`
+file, commit and push it. The default steps are setup, format, build, unittest and deploy. If you want to run integration tests there
+are some already there for integrationtesting with specific databases.
 
 ## Release
 
-Commit the new Orb to the git repository and [set the release type in the commit message](https://circleci.com/docs/2.0/creating-orbs/#issue-a-new-release). `[semver:patch]` as part of the message in case you want to release a patch version or your Orb.
+Commit the new Orb to the git repository and [set the release type in the commit message](https://circleci.com/docs/2.0/creating-orbs/#issue-a-new-release).
+`[semver:patch]` as part of the message in case you want to release a patch version or your Orb.
