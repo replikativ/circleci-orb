@@ -1,0 +1,9 @@
+description: |
+  Deploy to Clojars
+executor: clojurecli
+steps:
+  - attach_workspace:
+      at: /home/circleci
+  - run:
+      name: deploy
+      command: clojure -T:build deploy
