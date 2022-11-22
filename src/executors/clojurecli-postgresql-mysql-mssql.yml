@@ -1,11 +1,11 @@
 description: |
   Default Clojure CLI Tools executor for replikativ projects using PostgreSQL, MySQL and MSSQL.
 docker:
-  - image: cimg/clojure:1.10-browsers
+  - image: cimg/clojure:1.11-browsers
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD
-  - image: cimg/postgres:14.2
+  - image: cimg/postgres:14.5
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD

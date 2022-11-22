@@ -1,7 +1,7 @@
 description: |
   Default Clojure CLI Tools executor for replikativ projects using Datahike Server for integration tests.
 docker:
-  - image: cimg/clojure:1.10-browsers
+  - image: cimg/clojure:1.11-browsers
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD
