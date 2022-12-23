@@ -10,7 +10,7 @@ steps:
       at: /home/circleci
   - run:
       name: Install xmllint
-      command: sudo apt-get install libxml2-utils
+      command: sudo apt-get update && sudo apt-get install libxml2-utils
   - run:
       name: Deploy Snapshot to Clojars
       command: |
