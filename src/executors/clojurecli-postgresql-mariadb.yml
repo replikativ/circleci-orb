@@ -5,7 +5,7 @@ docker:
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD
-  - image: cimg/postgres:14.5
+  - image: docker.io/postgres:15
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD
@@ -13,7 +13,7 @@ docker:
       POSTGRES_DB: config-test
       POSTGRES_USER: alice
       POSTGRES_PASSWORD: foo
-  - image: cimg/mariadb:10.11
+  - image: docker.io/mariadb:10
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD
