@@ -1,21 +1,28 @@
 description: |
   Build a jar with depstar for deployment to Clojars.
-executor: clojurecli
+executor: tools/clojurecli
 parameters:
-  jarname:
-    default: "libary"
-    type: string
+  build_cljs:
+    type: boolean
+    default: false
 steps:
   - attach_workspace:
       at: /home/circleci
   - run:
-      name: Update pom
-      command: clojure -Spom
+      name: clean
+      command: clojure -T:build clean
   - run:
-      name: Build
-      command: clojure -Sdeps '{:deps {seancorfield/depstar {:mvn/version "1.1.116"}}}' "-m" "hf.depstar.jar" "replikativ-<<parameters.jarname>>.jar"
-      no_output_timeout: 5m
+      name: jar
+      command: clojure -T:build jar
+  - when:
+      condition: <<parameters.build_cljs>>
+      steps:
+        - run:
+            name: compile_cljs
+            command: npx shadow-cljs compile ci
+            no_output_timeout: 5m
   - persist_to_workspace:
       root: /home/circleci/
       paths:
-        - replikativ/replikativ-<<parameters.jarname>>.jar
+        - .m2
+        - replikativ
