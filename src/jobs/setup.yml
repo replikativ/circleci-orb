@@ -4,7 +4,7 @@ executor: clojurecli
 parameters:
   setup_cljs:
     type: boolean
-    default: true
+    default: false
 steps:
   - restore_cache:
       keys:

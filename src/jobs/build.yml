@@ -1,6 +1,6 @@
 description: |
   Build a jar with depstar for deployment to Clojars.
-executor: tools/clojurecli
+executor: clojurecli
 parameters:
   build_cljs:
     type: boolean
@@ -25,4 +25,5 @@ steps:
       root: /home/circleci/
       paths:
         - .m2
+        - .npm
         - replikativ
