@@ -11,5 +11,7 @@ docker:
       password: $DOCKER_PASSWORD
     environment:
       CASSANDRA_LISTEN_ADDRESS: "127.0.0.1"
+      MAX_HEAP_SIZE: 2048m
+      HEAP_NEWSIZE: 512m
 resource_class: large
 working_directory: /home/circleci/replikativ
