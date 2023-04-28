@@ -5,7 +5,7 @@ docker:
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD
-  - image: cassandra:latest
+  - image: cassandra:4.1
     auth:
       username: $DOCKER_LOGIN
       password: $DOCKER_PASSWORD
