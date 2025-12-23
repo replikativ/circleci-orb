@@ -1,0 +1,9 @@
+description: |
+  Install tooling
+executor: clojurecli
+steps:
+  - run:
+      name: install babashka
+      environment:
+        BABASHKA_VERSION: 1.12.213
+      command: curl -sSL "https://github.com/babashka/babashka/releases/download/v${BABASHKA_VERSION}/babashka-${BABASHKA_VERSION}-linux-amd64-static.tar.gz" | sudo tar -xz -C /usr/local/bin/ && bb --version
