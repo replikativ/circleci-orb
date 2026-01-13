@@ -1,37 +1,42 @@
 version: 2.1
 
 orbs:
-  orb-tools: circleci/orb-tools@9.0
+  orb-tools: circleci/orb-tools@12.4
 
-parameters:
-  run-integration-tests:
-    type: boolean
-    default: false
-  dev-orb-version:
-    type: string
-    default: "dev:alpha"
+jobs:
+  publish-increment:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run:
+          name: Check for skip-release flag
+          command: |
+            if ! git log -1 --pretty=%B | grep -q '\[skip-release\]'; then
+              echo "[skip-release] flag not found, skipping publish"
+              circleci-agent step halt
+            fi
+      - run:
+          name: Install CircleCI CLI
+          command: curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/main/install.sh | sudo bash
+      - run:
+          name: Pack orb
+          command: circleci orb pack src > orb.yml
+      - run:
+          name: Publish incremented version
+          command: circleci orb publish increment orb.yml replikativ/clj-tools patch --token $CIRCLE_TOKEN
 
 workflows:
-  lint_pack_publish:
+  lint-pack-publish:
     jobs:
       - orb-tools/lint
       - orb-tools/pack:
           requires:
             - orb-tools/lint
-      - orb-tools/publish-dev:
+      - publish-increment:
           context: orb-deploy
-          orb-name: replikativ/clj-tools
-          publish-alpha-version: false
           requires:
             - orb-tools/pack
-      - orb-tools/dev-promote-prod-from-commit-subject:
-          context: orb-deploy
-          orb-name: replikativ/clj-tools
-          add-pr-comment: false
-          fail-if-semver-not-indicated: true
-          publish-version-tag: false
-          requires:
-            - orb-tools/publish-dev
           filters:
             branches:
               only: clj-tools

@@ -2,7 +2,7 @@ name: Build Docker Image
 
 on:
   push:
-    branches: [main]
+    branches: [clj-tools]
     paths:
       - 'Dockerfile'
   pull_request:

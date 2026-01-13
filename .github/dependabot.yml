@@ -4,7 +4,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-      time: "22:05"
+      time: "23:12"
       timezone: "Europe/Berlin"
     assignees:
       - "timokramer"
