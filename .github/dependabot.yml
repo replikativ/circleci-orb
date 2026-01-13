@@ -3,6 +3,11 @@ updates:
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
-      interval: "cron"
-      cronjob: "45 14 * * *"
+      interval: "daily"
+      time: "22:05"
       timezone: "Europe/Berlin"
+    assignees:
+      - "timokramer"
+    commit-message:
+      prefix: "[image:update] "
+    target-branch: "clj-tools"
