@@ -1,5 +1,6 @@
 description: |
-  Run integrationtests via ./bin/run-integrationtests using PostgreSQL and MariaDB
+  Run integrationtests via ./bin/run-integrationtests
+  using PostgreSQL and MariaDB
 executor: clojurecli-postgresql-mariadb
 steps:
   - attach_workspace:

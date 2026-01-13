@@ -12,19 +12,24 @@ jobs:
       - run:
           name: Check for skip-release flag
           command: |
-            if ! git log -1 --pretty=%B | grep -q '\[skip-release\]'; then
-              echo "[skip-release] flag not found, skipping publish"
+            if ! git log -1 --pretty=%B | grep -q '\[semver:patch\]'; then
+              echo "[semver:patch] flag not found, skipping publish"
               circleci-agent step halt
             fi
       - run:
           name: Install CircleCI CLI
-          command: curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/main/install.sh | sudo bash
+          command: |
+            URL=https://raw.githubusercontent.com
+            URL=$URL/CircleCI-Public/circleci-cli/main/install.sh
+            curl -fLSs $URL | sudo bash
       - run:
           name: Pack orb
           command: circleci orb pack src > orb.yml
       - run:
           name: Publish incremented version
-          command: circleci orb publish increment orb.yml replikativ/clj-tools patch --token $CIRCLE_TOKEN
+          command: |
+            circleci orb publish increment orb.yml \
+              replikativ/clj-tools patch --token $CIRCLE_TOKEN
 
 workflows:
   lint-pack-publish:

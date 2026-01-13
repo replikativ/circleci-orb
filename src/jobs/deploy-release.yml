@@ -1,5 +1,6 @@
 description: |
-  Deploy a release version to Clojars if there is not SNAPSHOT in the version string.
+  Deploy a release version to Clojars
+  if there is not SNAPSHOT in the version string.
 executor: clojurecli
 parameters:
   jarname:
@@ -14,10 +15,13 @@ steps:
   - run:
       name: Deploy Release to Clojars
       command: |
-        VERSION=$(xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml)
+        XPATH='/*[local-name()="project"]/*[local-name()="version"]/text()'
+        VERSION=$(xmllint --xpath "$XPATH" pom.xml)
         if [[ ${VERSION} =~ .*-SNAPSHOT ]]; then
             echo "Not releasing because this is a snapshot: $VERSION"
             exit 0
         else
-            clojure -Sdeps '{:deps {slipset/deps-deploy {:mvn/version "RELEASE"}}}' "-m" "deps-deploy.deps-deploy" "deploy" "replikativ-<<parameters.jarname>>.jar"
+            DEPS='{:deps {slipset/deps-deploy {:mvn/version "RELEASE"}}}'
+            clojure -Sdeps "$DEPS" -m deps-deploy.deps-deploy \
+              deploy "replikativ-<<parameters.jarname>>.jar"
         fi

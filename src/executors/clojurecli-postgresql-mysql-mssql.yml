@@ -1,5 +1,6 @@
 description: |
-  Default Clojure CLI Tools executor for replikativ projects using PostgreSQL, MySQL and MSSQL.
+  Default Clojure CLI Tools executor for replikativ projects
+  using PostgreSQL, MySQL and MSSQL.
 docker:
   - image: cimg/clojure:1.11-browsers
     auth:

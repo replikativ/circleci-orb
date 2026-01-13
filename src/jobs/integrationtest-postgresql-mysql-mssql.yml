@@ -1,5 +1,6 @@
 description: |
-  Run integrationtests via ./bin/run-integrationtests using PostgreSQL, MySQL and MSSQL
+  Run integrationtests via ./bin/run-integrationtests
+  using PostgreSQL, MySQL and MSSQL
 executor: clojurecli-postgresql-mysql-mssql
 steps:
   - attach_workspace:

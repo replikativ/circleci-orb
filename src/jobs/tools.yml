@@ -6,4 +6,8 @@ steps:
       name: install babashka
       environment:
         BABASHKA_VERSION: 1.12.213
-      command: curl -sSL "https://github.com/babashka/babashka/releases/download/v${BABASHKA_VERSION}/babashka-${BABASHKA_VERSION}-linux-amd64-static.tar.gz" | sudo tar -xz -C /usr/local/bin/ && bb --version
+      command: |
+        BASE=https://github.com/babashka/babashka/releases/download
+        URL="$BASE/v${BABASHKA_VERSION}/babashka-${BABASHKA_VERSION}-linux-amd64-static.tar.gz"
+        curl -sSL "$URL" | sudo tar -xz -C /usr/local/bin/
+        bb --version
