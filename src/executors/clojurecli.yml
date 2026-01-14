@@ -3,6 +3,6 @@ description:
 docker:
   - image: ghcr.io/replikativ/circleci-orb:latest
     auth:
-      username: $DOCKER_LOGIN
-      password: $DOCKER_PASSWORD
+      username: $GHCR_LOGIN
+      password: $GHCR_PASSWORD
 working_directory: /home/circleci/replikativ
