@@ -1,8 +1,12 @@
-FROM docker.io/cimg/clojure:1.12-openjdk-21.0-browsers AS build
+FROM docker.io/cimg/openjdk:25.0-browsers
 
-RUN curl -s https://raw.githubusercontent.com/babashka/babashka/master/install | bash
+RUN sudo apt-get update && sudo apt-get install -y rlwrap && sudo rm -rf /var/lib/apt/lists/*
 
-FROM docker.io/cimg/clojure:1.12-openjdk-21.0-browsers
+# Install latest Clojure CLI
+RUN curl -L -O https://github.com/clojure/brew-install/releases/latest/download/linux-install.sh && \
+    chmod +x linux-install.sh && \
+    sudo ./linux-install.sh && \
+    rm linux-install.sh
 
-
-COPY --from=build /usr/local/bin/bb /usr/local/bin/bb
+# Install latest Babashka
+RUN curl -sL https://raw.githubusercontent.com/babashka/babashka/master/install | sudo bash
