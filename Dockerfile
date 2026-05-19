@@ -1,4 +1,4 @@
-FROM docker.io/cimg/openjdk:25.0-browsers
+FROM docker.io/cimg/openjdk:26.0-browsers
 
 RUN sudo apt-get update && sudo apt-get install -y rlwrap && sudo rm -rf /var/lib/apt/lists/*
 
